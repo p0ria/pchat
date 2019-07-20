@@ -1,0 +1,10 @@
+{
+  "type": "mssql",
+  "host": "localhost",
+  "port": 1433,
+  "username": "sa",
+  "password": "r@h3Madrese",
+  "database": "pchat",
+  "entities": ["src/**/*.entity{.ts,.js}"],
+  "synchronize": true
+}
