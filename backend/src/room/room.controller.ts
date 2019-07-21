@@ -1,29 +1,31 @@
 import { Body, Controller, Get, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { RoomService } from './room.service';
-import { Room } from '../models/entities/room.entity';
 import { CreateRoomDto } from 'src/models/dtos/create-room.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { multerOptions } from './config';
+import { UrlConfig } from '../config';
+import { RoomDto } from '../models/dtos/room.dto';
 
-@Controller('rooms')
+@Controller('api/rooms')
 export class RoomController {
   constructor(private readonly roomService: RoomService){}
 
   @Get()
-  async findAll(): Promise<Room[]> {
-    return this.roomService.findAll();
+  async findAll(): Promise<CreateRoomDto[]> {
+    return this.roomService.findAll().then(
+      rooms => rooms.map(r => new RoomDto(r)));
   }
 
   @Post()
-  create(createRoomDto: CreateRoomDto): Room{
-    return this.roomService.create(createRoomDto);
+  async create(@Body() createRoomDto: CreateRoomDto): Promise<RoomDto>{
+    let room = await this.roomService.create(createRoomDto);
+    return new RoomDto(room);
   }
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file', multerOptions))
-  upload(@UploadedFile() file): Room{
-    console.log(file);
-    return null;
+  upload(@UploadedFile() file): string{
+    return process.env.ROOMS_UPLOAD_LOCATION + file.filename;
   }
 }

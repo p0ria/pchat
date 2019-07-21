@@ -11,7 +11,7 @@ export class Room {
   name: string;
 
   @Column()
-  avatarUrl: string;
+  avatarUrlRelative: string;
 
   @ManyToMany(type => User, user => user.rooms)
   users: User[];

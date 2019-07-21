@@ -14,7 +14,7 @@ export class RoomService {
      return this.roomRepository.find();
    }
 
-   create(createRoomDto: CreateRoomDto): Room {
-      return this.roomRepository.create(createRoomDto);
+   create(createRoomDto: CreateRoomDto): Promise<Room> {
+      return this.roomRepository.save(createRoomDto);
    }
 }

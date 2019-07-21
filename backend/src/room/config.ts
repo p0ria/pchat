@@ -8,7 +8,7 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 export const multerOptions = {
   // Enable file size limits
   limits: {
-    fileSize: +process.env.MAX_FILE_SIZE,
+    fileSize: +process.env.ROOMS_MAX_FILE_SIZE,
   },
   // Check the mimetypes to allow for upload
   fileFilter: (req: any, file: any, cb: any) => {
@@ -24,7 +24,7 @@ export const multerOptions = {
   storage: diskStorage({
     // Destination storage path details
     destination: (req: any, file: any, cb: any) => {
-      const uploadPath = process.env.UPLOAD_LOCATION;
+      const uploadPath = process.env.ROOMS_UPLOAD_LOCATION;
       // Create folder if doesn't exist
       if (!existsSync(uploadPath)) {
         mkdirSync(uploadPath);
