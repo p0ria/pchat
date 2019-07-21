@@ -17,5 +17,4 @@ export class RoomService {
    create(createRoomDto: CreateRoomDto): Room {
       return this.roomRepository.create(createRoomDto);
    }
-
 }
