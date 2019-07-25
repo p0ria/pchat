@@ -11,7 +11,7 @@ export class RoomService {
     private readonly roomRepository: Repository<Room>){}
 
    findAll(): Promise<Room[]> {
-     return this.roomRepository.find();
+     return this.roomRepository.find({relations: ["users", "admin"]});
    }
 
    create(createRoomDto: CreateRoomDto): Promise<Room> {

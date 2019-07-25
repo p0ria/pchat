@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
 import { RoomChat } from './room.chat.entity';
 
@@ -15,6 +15,9 @@ export class Room {
 
   @ManyToMany(type => User, user => user.rooms)
   users: User[];
+
+  @ManyToOne(type => User, user => user.roomAdmins, {nullable: false})
+  admin: User;
 
   @OneToMany(type => RoomChat, chats => chats.room)
   chats!: RoomChat[];
