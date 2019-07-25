@@ -2,6 +2,7 @@ import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColum
 import { Room } from './room.entity';
 import { RoomChat } from './room.chat.entity';
 
+
 @Entity()
 export class User {
 
@@ -9,13 +10,16 @@ export class User {
   id: number;
 
   @Column()
-  userName: string;
+  username: string;
 
   @Column()
   password: string;
 
   @Column()
   avatarUrl: string;
+
+  @Column({default: "user"})
+  role: string;
 
   @ManyToMany(type => Room, room => room.users)
   @JoinTable()
