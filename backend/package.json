@@ -4,8 +4,12 @@
   "description": "",
   "author": "",
   "license": "MIT",
+  "engines": {
+    "node": "8.11.3",
+    "npm": "6.9.0"
+  },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json1",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
