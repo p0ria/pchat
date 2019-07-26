@@ -10,11 +10,11 @@ export class LoginService {
     // @ts-ignore
     let body = JSON.stringify({username: username, password: password});
     this.http.post(
-      "http://localhost:3000/api/login",
+      "http://localhost:4000/api/login",
       body,
       {headers: {"Content-Type" : "application/json"} })
-      .subscribe((token) => {
-          this.http.get("http://localhost:3000/api/me",
+      .subscribe((token : {access_token: string}) => {
+          this.http.get("http://localhost:4000/api/me",
             {headers: {"Authorization": "Bearer " + token.access_token}})
             .subscribe(user => console.log(user),
               err => console.log(err));

@@ -4,6 +4,7 @@ import { MeService } from './me.service';
 import { RoomDto } from '../models/dtos/room.dto';
 import { CreateRoomDto } from '../models/dtos/create-room.dto';
 import { User } from '../models/entities/user.entity';
+import { UserDto } from '../models/dtos/user.dto';
 
 @Controller('api/me')
 export class MeController {
@@ -12,8 +13,9 @@ export class MeController {
 
   @Get()
   @UseGuards(AuthGuard('jwt'))
-  getProfile(@Request() req): Promise<User>{
-    return this.meService.getMe(req.user.id);
+  async getProfile(@Request() req): Promise<User>{
+    let me = await this.meService.getMe(req.user.id);
+    return new UserDto(me);
   }
 
   @Put('rooms/:id/join')

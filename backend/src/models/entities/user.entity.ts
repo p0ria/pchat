@@ -14,7 +14,7 @@ export class User {
   username: string;
 
   @Column()
-  avatarUrl: string;
+  avatarUrlRelative: string;
 
   @Column()
   role: string;
