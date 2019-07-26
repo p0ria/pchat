@@ -1,0 +1,23 @@
+<div class="login-container" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="login-card" fxLayout="column" fxLayoutGap="20px">
+    <mat-card-header fxLayout="row" fxLayoutAlign="start center">
+      <div mat-card-avatar class="login-card-header-image"></div>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column">
+      <mat-divider ></mat-divider>
+      <form #form="ngForm" class="login-form" fxLayout="column" fxLayoutAlign="center">
+        <mat-form-field>
+          <input matInput placeholder="username" name="username" [(ngModel)]="username">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" matInput placeholder="password" name="password" [(ngModel)]="password">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions fxLayout fxLayoutAlign="end">
+      <button mat-raised-button color="primary" (click)="login(form)">LOGIN</button>
+      <button mat-raised-button>CANCEL</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

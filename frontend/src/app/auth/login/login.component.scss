@@ -1,0 +1,21 @@
+.login-container{
+  height: 100%;
+}
+.login-card{
+  width: 400px;
+}
+.login-card-header-image{
+  background-image: url('../../../assets/login.png');
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+mat-card-content{
+  height: 200px;
+}
+mat-divider{
+  max-width: 95%;
+}
+.login-form{
+  height: 100%;
+  width: 95%;
+}
