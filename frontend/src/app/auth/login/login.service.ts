@@ -7,7 +7,6 @@ export class LoginService {
   constructor(private readonly http: HttpClient){}
 
   public login(username: string , password: string){
-    // @ts-ignore
     let body = JSON.stringify({username: username, password: password});
     this.http.post(
       "http://localhost:4000/api/login",

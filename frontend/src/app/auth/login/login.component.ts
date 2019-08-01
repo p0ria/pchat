@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {LoginService} from './login.service';
 import {NgForm} from '@angular/forms';
+import {NbMenuItem} from "@nebular/theme";
 
 @Component({
   selector: 'app-login',
@@ -8,13 +9,35 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent  {
-  username: string;
-  password: string;
+  items: NbMenuItem[] = [
+    {
+      title: 'Profile',
+      expanded: true,
+      children: [
+        {
+          title: 'Change Password',
+          link: 'http://www.google.com'
+        },
+        {
+          title: 'Private Policy',
+          url: 'http://www.zonipakhsh.ir/',
+          icon: 'plus-outline'
+        },
+        {
+          title: 'Logout',
+          link: 'x'
+        }
+      ]
+    },
+    {
+      title: 'Shopping Bag',
+    },
+    {
+      title: 'Orders',
+    },
+  ];
 
   constructor(private readonly loginService: LoginService) { }
 
-  login(form: NgForm){
-    this.loginService.login(this.username, this.password);
-  }
 
 }
