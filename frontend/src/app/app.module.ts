@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 
 import {NebularModule} from "./nebular.module";
 import {CoreModule} from "./modules/core/core.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {CoreModule} from "./modules/core/core.module";
   imports: [
     CoreModule,
     AppRoutingModule,
-    NebularModule
+    NebularModule,
+    BrowserAnimationsModule
   ],
   bootstrap: [AppComponent]
 })
