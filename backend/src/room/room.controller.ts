@@ -2,7 +2,6 @@ import { Body, Controller, Get, Post, UploadedFile, UseInterceptors } from '@nes
 import { RoomService } from './room.service';
 import { CreateRoomDto } from '../models/dtos/create-room.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
 import { multerOptions } from './config';
 import { RoomDto } from '../models/dtos/room.dto';
 

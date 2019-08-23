@@ -7,7 +7,7 @@ import { Injectable } from '@nestjs/common';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>){}
+    private readonly userRepository: Repository<User>) {}
 
   async findOne(username: string): Promise<User | undefined>{
     return this.userRepository.findOne(
@@ -16,5 +16,15 @@ export class UserService {
 
   findById(id: number): Promise<User | undefined>{
     return this.userRepository.findOne(id);
+  }
+  
+  create(username: string, password: string, role: string = 'user'): Promise<User>{
+    return this.userRepository.save({
+      username: username,
+      role: role,
+      credential: {
+        password: password
+      }
+    });
   }
 }

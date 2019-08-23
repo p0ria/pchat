@@ -1,10 +1,11 @@
 import {NgModule} from "@angular/core";
 import {
+  NbActionsModule, NbContextMenuModule,
   NbIconModule,
   NbLayoutModule,
-  NbMenuModule,
+  NbMenuModule, NbSearchModule,
   NbSidebarModule,
-  NbThemeModule
+  NbThemeModule, NbUserModule
 } from "@nebular/theme";
 import {NbEvaIconsModule} from "@nebular/eva-icons";
 import {FlexLayoutModule} from "@angular/flex-layout";
@@ -12,18 +13,26 @@ import {MaterialModule} from "../material/material.module";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 
+const NB_MODULES = [
+  NbThemeModule,
+  NbLayoutModule,
+  NbEvaIconsModule,
+  NbSidebarModule,
+  NbMenuModule,
+  NbIconModule,
+  NbActionsModule,
+  NbUserModule,
+  NbSearchModule,
+  NbContextMenuModule
+];
+
 @NgModule({
   exports: [
-    NbThemeModule,
-    NbLayoutModule,
-    NbEvaIconsModule,
-    NbSidebarModule,
-    NbMenuModule,
-    NbIconModule,
     FlexLayoutModule,
     MaterialModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    NB_MODULES
   ]
 })
 export class SharedModule {

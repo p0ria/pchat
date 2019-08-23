@@ -13,13 +13,13 @@ export class User {
   @Column()
   username: string;
 
-  @Column()
+  @Column({nullable: true})
   avatarUrlRelative: string;
 
   @Column()
   role: string;
 
-  @OneToOne(type => UserCredential, uc => uc.user)
+  @OneToOne(type => UserCredential, uc => uc.user, { cascade: true })
   credential!: UserCredential;
 
   @ManyToMany(type => Room, room => room.users)

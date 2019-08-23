@@ -9,8 +9,8 @@ export class UserDto extends User{
     for(let p in props){
       this[p] = props[p];
     }
-    this.avatarUrl = UrlConfig.BASE_ADDRESS + this.avatarUrlRelative;
-    this.rooms = this.rooms.map(r => new RoomDto(r));
+    this.avatarUrl = this.avatarUrlRelative ? UrlConfig.BASE_ADDRESS + this.avatarUrlRelative : null;
+    this.rooms = this.rooms ? this.rooms.map(r => new RoomDto(r)) : null;
     this.roomAdmins = this.roomAdmins ? this.roomAdmins.map(r => new RoomDto(r)) : null;
   }
 

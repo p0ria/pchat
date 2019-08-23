@@ -2,14 +2,13 @@ import {NgModule} from "@angular/core";
 import {PROVIDERS} from "./services";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     ...PROVIDERS
@@ -18,6 +17,7 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
   ]
 })
 export class CoreModule {

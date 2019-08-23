@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {NbMenuItem} from "@nebular/theme";
-import {AuthService} from "../../../core/services/auth.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import * as fromAuth from '../../state/auth.reducers';
+import {select, Store} from "@ngrx/store";
+import * as authActions from '../../state/auth.actions';
+import * as authSelectors from '../../state/auth.selectors';
 
 @Component({
   selector: 'app-login',
@@ -19,44 +21,35 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ])
   ]
 })
-export class LoginComponent {
-  isLoginScreen: boolean = true;
-
-
-  items: NbMenuItem[] = [
-    {
-      title: 'Profile',
-      expanded: true,
-      children: [
-        {
-          title: 'Change Password',
-          link: 'http://www.google.com',
-          icon: 'star'
-        },
-        {
-          title: 'Private Policy',
-          url: 'http://www.zonipakhsh.ir/',
-          icon: 'plus-outline'
-        },
-        {
-          title: 'Logout',
-          link: 'x'
-        }
-      ]
-    },
-    {
-      title: 'Shopping Bag',
-    },
-    {
-      title: 'Orders',
-    },
-  ];
+export class LoginComponent implements OnInit{
+  isLoginScreen: boolean;
   hide: boolean = true;
+  password: string;
+  username: string;
+  error?: string;
 
-  constructor(private readonly authService: AuthService){}
+  constructor(
+    private store: Store<fromAuth.State>){}
+
+  ngOnInit(): void {
+    this.store.pipe(select(authSelectors.getError))
+      .subscribe(err => this.error = err);
+    this.store.pipe(select(authSelectors.getIsLoginScreen))
+      .subscribe(isLoginScreen => this.isLoginScreen = isLoginScreen);
+  }
 
   changePage(toLogin: boolean) {
-    this.isLoginScreen = toLogin;
+    this.store.dispatch(new authActions.ChangeScreen(toLogin));
     return false;
+  }
+
+  login() {
+    this.store.dispatch(
+      new authActions.Login({username: this.username, password: this.password}));
+  }
+
+  register(){
+    this.store.dispatch(
+      new authActions.Register({username: this.username, password: this.password}));
   }
 }
