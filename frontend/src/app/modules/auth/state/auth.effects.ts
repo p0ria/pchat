@@ -2,11 +2,13 @@ import {Injectable} from "@angular/core";
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {AuthService} from "../../core/services/auth.service";
 import * as authActions from "./auth.actions";
+import * as appActions from "../../../state/app.actions";
 import {catchError, map, mergeMap, tap} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {Action} from "@ngrx/store";
 import {User} from "../../../models/user.model";
 import {Router} from "@angular/router";
+
 
 @Injectable()
 export class AuthEffects {
@@ -20,9 +22,11 @@ export class AuthEffects {
     ofType(authActions.AuthActionTypes.Login),
     mergeMap((action: authActions.Login) =>
       this.authService.login(action.payload.username, action.payload.password).pipe(
+        tap((result: {access_token: string}) => localStorage.setItem('pchat_token', result.access_token)),
         mergeMap((result: {access_token: string}) => [
-          new authActions.LoginSuccess(result.access_token),
-          new authActions.GetProfile(result.access_token),
+          new authActions.LoginSuccess(),
+          new appActions.LoadTokenSuccess(result.access_token),
+          new appActions.GetProfile(result.access_token),
           new authActions.Redirect('/master')]),
         catchError( err => of(new authActions.LoginFail(err.message))))
     )
@@ -39,21 +43,13 @@ export class AuthEffects {
     )
   );
 
-  @Effect()
-  getProfile$: Observable<Action> = this.actions$.pipe(
-    ofType(authActions.AuthActionTypes.GetProfile),
-    mergeMap((action: authActions.GetProfile) => this.authService.getProfile(action.payload).pipe(
-      map(user => new authActions.GetProfileSuccess(user)),
-      catchError(err => of(new authActions.GetProfileFail(err.message)))
-    ))
-  );
-
-  @Effect()
+  @Effect({dispatch: false})
   redirect$: Observable<Action> = this.actions$.pipe(
     ofType(authActions.AuthActionTypes.Redirect),
     tap((action: authActions.Redirect) => this.router.navigateByUrl(action.payload)),
-    map(() => new authActions.RedirectSuccess())
   );
+
+
 
 
 

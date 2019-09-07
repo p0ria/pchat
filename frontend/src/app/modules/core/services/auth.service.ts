@@ -12,14 +12,13 @@ export class AuthService {
     return this.http.post(
       "http://localhost:3000/api/login",
       body,
-      {headers: {"Content-Type" : "application/json"} }
+      {headers: {"Content-Type" : "application/json", "No-Auth" : "True"} }
     );
   }
 
   public getProfile(token: string): Observable<User>{
     return this.http.get<User>(
-      "http://localhost:3000/api/me",
-      {headers: {"Authorization": `Bearer ${token}`}}
+      "http://localhost:3000/api/me"
     );
   }
 

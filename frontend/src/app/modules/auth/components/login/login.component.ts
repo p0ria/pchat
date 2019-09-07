@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit{
   error?: string;
 
   constructor(
-    private store: Store<fromAuth.State>){}
+    private store: Store<fromAuth.State>){
+  }
 
   ngOnInit(): void {
     this.store.pipe(select(authSelectors.getError))

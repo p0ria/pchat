@@ -7,7 +7,8 @@ import {StoreModule} from "@ngrx/store";
 @NgModule({
   imports: [
     MasterRoutingModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature('master', {})
   ],
   declarations: [
     ...COMPONENTS,

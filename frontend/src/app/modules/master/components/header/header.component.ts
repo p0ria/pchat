@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NbMediaBreakpointsService, NbMenuItem, NbSidebarService, NbThemeService} from "@nebular/theme";
+import {NbMediaBreakpointsService, NbMenuItem, NbMenuService, NbSidebarService, NbThemeService} from "@nebular/theme";
 import {User} from "../../../../models/user.model";
 import {select, Store} from "@ngrx/store";
-import * as fromAuth from "../../../auth/state/auth.reducers";
-import * as authSelectors from "../../../auth/state/auth.selectors";
 import {map, takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
+import * as fromRoot from "../../../../state/app.reducers";
+import * as appActions from "../../../../state/app.actions";
+import * as appSelectors from "../../../../state/app.selectors";
 
 @Component({
   selector: 'master-header',
@@ -18,13 +19,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userPictureOnly: boolean = false;
   userMenu: NbMenuItem[] = [
     { title: 'Profile' },
-    { title: 'Log out', link: 'login' }];
+    { title: 'Logout' }];
 
   constructor(
-    private store: Store<fromAuth.State>,
+    private store: Store<fromRoot.State>,
     private themeService: NbThemeService,
     private sidebarService: NbSidebarService,
-    private breakpointService: NbMediaBreakpointsService) { }
+    private breakpointService: NbMediaBreakpointsService,
+    private menuService: NbMenuService) { }
 
   ngOnInit() {
     const { xl } = this.breakpointService.getBreakpointsMap();
@@ -35,8 +37,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       )
       .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
 
-    this.store.pipe(select(authSelectors.getUser))
-      .subscribe(user => this.user = user);
+    this.store.pipe(select(appSelectors.getUser))
+      .subscribe(user => {
+        this.user = user;
+      });
+
+    this.menuService.onItemClick().subscribe(
+      m => {if(m.item.title === 'Logout') this.store.dispatch(new appActions.Logout())}
+    )
 
   }
 

@@ -1,5 +1,4 @@
-import {User} from "../../../models/user.model";
-import * as fromRoot from '../../../state/app.state';
+import * as fromRoot from '../../../state/app.reducers';
 import {AuthActions, AuthActionTypes} from "./auth.actions";
 
 export interface State extends fromRoot.State{
@@ -7,45 +6,21 @@ export interface State extends fromRoot.State{
 }
 
 export interface AuthState {
-  user: User;
-  token: string | null;
+  isLoginScreen: boolean
   error: string | null;
-  ui: {
-    isLoginScreen: boolean
-  }
 }
 
-const initialState: AuthState = {
-  user: null,
-  token: null,
-  error: null,
-  ui: {
-    isLoginScreen: true
-  }
+export const initialState: AuthState = {
+  isLoginScreen: true,
+  error: null
 };
-
 
 export function reducer(state = initialState, action: AuthActions): AuthState {
   switch (action.type) {
     case AuthActionTypes.LoginSuccess:
       return {
         ...state,
-        token: action.payload,
         error: null
-      };
-
-    case AuthActionTypes.GetProfileSuccess:
-      return {
-        ...state,
-        user: action.payload,
-        error: null
-      };
-
-    case AuthActionTypes.GetProfileFail:
-      return {
-        ...state,
-        user: null,
-        error: action.payload
       };
 
     case AuthActionTypes.LoginFail:
@@ -57,11 +32,8 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
     case AuthActionTypes.RegisterSuccess:
       return {
         ...state,
-        error: null,
-        ui: {
-          ...state.ui,
-          isLoginScreen: true
-        }
+        isLoginScreen: true,
+        error: null
       };
 
     case AuthActionTypes.RegisterFail:
@@ -73,10 +45,7 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
     case AuthActionTypes.ChangeScreen:
       return {
         ...state,
-        ui: {
-          ...state.ui,
-          isLoginScreen: action.payload
-        }
+        isLoginScreen: action.payload
       };
 
     default:
