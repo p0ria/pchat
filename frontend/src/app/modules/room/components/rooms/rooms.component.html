@@ -1,0 +1,12 @@
+<div class="rooms-container" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="10px">
+  <a [routerLink]="[room.id]" *ngFor="let room of (rooms$ | async)">
+    <nb-card >
+      <nb-card-header fxLayout="row" fxLayoutAlign="space-between">
+        <span>{{room.name}}</span> <span>{{room.users? room.users.length : 0}} </span>
+      </nb-card-header>
+      <nb-card-body>
+        <img src="{{room.avatarUrl}}">
+      </nb-card-body>
+    </nb-card>
+  </a>
+</div>

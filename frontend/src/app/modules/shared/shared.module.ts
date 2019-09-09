@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {
-  NbActionsModule, NbContextMenuModule,
+  NbActionsModule, NbCardModule, NbChatModule, NbContextMenuModule,
   NbIconModule,
   NbLayoutModule,
   NbMenuModule, NbSearchModule,
@@ -23,7 +23,9 @@ const NB_MODULES = [
   NbActionsModule,
   NbUserModule,
   NbSearchModule,
-  NbContextMenuModule
+  NbContextMenuModule,
+  NbCardModule,
+  NbChatModule
 ];
 
 @NgModule({

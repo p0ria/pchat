@@ -1,5 +1,7 @@
-import {LoginComponent} from "./login/login.component";
+import {LoginComponent} from "./login/ui/login.component";
+import {LoginContainerComponent} from "./login/login.container.component";
 
 export const COMPONENTS = [
-  LoginComponent
+  LoginComponent,
+  LoginContainerComponent
 ];

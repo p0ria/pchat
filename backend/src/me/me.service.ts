@@ -37,7 +37,7 @@ export class MeService {
   }
 
   async findAllRooms(userId: number): Promise<Room[]> {
-    let user = await this.getUser(userId, 'rooms');
+    let user = await this.getUser(userId, 'rooms', 'rooms.users');
     return user.rooms;
   }
 

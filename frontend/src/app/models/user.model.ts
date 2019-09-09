@@ -4,7 +4,6 @@ import {Room} from "./room.model";
 export interface User {
   id: number;
   username: string;
-  avatarUrlRelative: string;
   role: string;
   rooms: Room[];
   roomChats: RoomChat[];

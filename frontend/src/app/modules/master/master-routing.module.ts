@@ -3,7 +3,12 @@ import {RouterModule, Routes} from "@angular/router";
 import {MasterComponent} from "./components/master/master.component";
 
 const routes: Routes = [
-  { path: '', component: MasterComponent}
+  { path: '', component: MasterComponent,
+    children: [
+      { path: '', redirectTo: 'rooms', pathMatch: 'full' },
+      { path: 'rooms',
+        loadChildren: () => import('../room/room.module').then(m => m.RoomModule)}
+    ]},
 ];
 
 @NgModule({

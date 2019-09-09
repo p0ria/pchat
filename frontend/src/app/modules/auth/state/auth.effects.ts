@@ -27,7 +27,7 @@ export class AuthEffects {
           new authActions.LoginSuccess(),
           new appActions.LoadTokenSuccess(result.access_token),
           new appActions.GetProfile(result.access_token),
-          new authActions.Redirect('/master')]),
+          new authActions.Redirect('/home')]),
         catchError( err => of(new authActions.LoginFail(err.message))))
     )
   );

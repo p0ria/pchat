@@ -24,13 +24,13 @@ export class SidenavComponent implements OnInit {
         },
         {
           title: 'Logout',
-          link: 'x'
         }
       ]
     },
     {
-      title: 'Shopping Bag',
-      icon: 'star'
+      title: 'Rooms',
+      icon: 'browser-outline',
+      link: 'rooms'
     },
     {
       title: 'Orders',
