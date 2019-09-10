@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put, Request, UseGuards } from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Put, Req, Request, UseGuards} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { MeService } from './me.service';
 import { RoomDto } from '../models/dtos/room.dto';
 import { CreateRoomDto } from '../models/dtos/create-room.dto';
 import { User } from '../models/entities/user.entity';
 import { UserDto } from '../models/dtos/user.dto';
+import {RoomChat} from "../models/entities/room.chat.entity";
+import {CreateChatDto} from "../models/dtos/create-chat.dto";
 
 @Controller('api/me')
 export class MeController {
@@ -47,5 +49,23 @@ export class MeController {
   createRoom(@Request() req, @Body() createRoomDto: CreateRoomDto): Promise<RoomDto>{
     return this.meService.createRoom(req.user.id, createRoomDto)
       .then(r => new RoomDto(r));
+  }
+  
+  @Get('rooms/:id/chats')
+  @UseGuards(AuthGuard('jwt'))
+  async getRoomChats(@Request() req, @Param('id') roomId): Promise<RoomChat[] | null>{
+    return this.meService.getRoomChats(roomId).then(
+        chats => {
+          return chats ? chats.map(chat => {
+            return {...chat, user: new UserDto(chat.user)}
+          }) : null
+        }
+    );
+  }
+  
+  @Post('rooms/:id/chats')
+  @UseGuards(AuthGuard('jwt'))
+  async addRoomChat(@Request() req, @Param('id') roomId, @Body() createChatDto: CreateChatDto): Promise<RoomChat | null>{
+    return this.meService.addRoomChat(createChatDto, req.user.id, roomId);
   }
 }

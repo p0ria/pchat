@@ -13,9 +13,12 @@ export class RoomChat {
   @Column()
   public text: string;
 
-  @ManyToOne(type => Room, room => room.chats)
+  @ManyToOne(type => Room, room => room.chats, {cascade: true})
   public room!: Room;
 
-  @ManyToOne(type => User, user => user.roomChats)
+  @ManyToOne(type => User, user => user.roomChats, {cascade: true})
   public user!: User;
+
+  @Column('datetime')
+  public date: Date;
 }

@@ -22,3 +22,8 @@ export const getSelectedRoom = createSelector(
   getRoomFeatureState,
   s => s.rooms ? s.rooms.find(r => r.id == s.selectedRoomId) : null
 );
+
+export const getRoomChats = createSelector(
+  getRoomFeatureState,
+  state => state.selectedRoomChats
+);

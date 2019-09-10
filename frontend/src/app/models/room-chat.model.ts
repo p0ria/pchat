@@ -6,6 +6,7 @@ export class RoomChat {
   public roomId!: number;
   public userId!: number;
   public text: string;
+  public date: Date;
   public room!: Room;
   public user!: User;
 }

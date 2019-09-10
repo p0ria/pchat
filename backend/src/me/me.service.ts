@@ -4,12 +4,15 @@ import { Repository } from 'typeorm';
 import { Room } from '../models/entities/room.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateRoomDto } from '../models/dtos/create-room.dto';
+import {RoomChat} from "../models/entities/room.chat.entity";
+import {CreateChatDto} from "../models/dtos/create-chat.dto";
 
 @Injectable()
 export class MeService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     @InjectRepository(Room) private readonly roomRepository: Repository<Room>,
+    @InjectRepository(RoomChat) private readonly roomChatRepository: Repository<RoomChat>
   ) {}
 
   async getMe(userId: number): Promise<User> {
@@ -41,15 +44,27 @@ export class MeService {
     return user.rooms;
   }
 
-  async createRoom(
-    userId: number,
-    createRoomDto: CreateRoomDto,
-  ): Promise<Room> {
+  async createRoom(userId: number, createRoomDto: CreateRoomDto): Promise<Room> {
     let user = await this.getUser(userId);
     return this.roomRepository.save({
       ...createRoomDto,
       admin: user,
       users: [user],
+    });
+  }
+  
+  async getRoomChats(roomId: number): Promise<RoomChat[] | null>{
+    let room = await this.roomRepository.findOne(roomId, {relations: ["chats", "chats.user"]});
+    return room ? room.chats : null;
+  }
+  
+  async addRoomChat(createChatDto: CreateChatDto, userId: number, roomId: number): Promise<RoomChat | null>{
+    let user = await this.getUser(userId);
+    let room = await this.roomRepository.findOne(roomId);
+    return this.roomChatRepository.save({
+      ...createChatDto,
+      user: user,
+      room: room
     });
   }
 
