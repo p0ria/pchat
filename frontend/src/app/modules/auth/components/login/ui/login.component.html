@@ -49,6 +49,7 @@
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
           </mat-form-field>
+          <input type="file" (change)="onFileChange($event)">
         </form>
       </mat-card-content>
       <mat-card-actions class="login-actions"

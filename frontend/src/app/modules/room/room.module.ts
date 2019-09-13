@@ -21,7 +21,9 @@ import * as fromRoom from "./state/room.reducers";
   ]
 })
 export class RoomModule{
-  constructor(private store: Store<fromRoom.State>){
+  constructor(
+    private store: Store<fromRoom.State>){
     store.dispatch(new roomActions.LoadUserRooms());
+    store.dispatch(new roomActions.SubscribeToChatsSocket())
   }
 }

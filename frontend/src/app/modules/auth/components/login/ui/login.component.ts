@@ -23,13 +23,12 @@ export class LoginComponent{
   @Input() error?: string;
   @Output() changeScreen = new EventEmitter<boolean>();
   @Output() login = new EventEmitter<{username: string, password: string}>();
-  @Output() register = new EventEmitter<{username: string, password: string}>();
+  @Output() register = new EventEmitter<{username: string, password: string, avatar: File}>();
 
   username: string;
   password: string;
+  avatar: File;
   hide: boolean = true;
-
-
 
   changePage(toLogin: boolean) {
     this.changeScreen.emit(toLogin);
@@ -42,7 +41,12 @@ export class LoginComponent{
   }
 
   registerUser(){
-    this.register.emit({username: this.username, password: this.password});
+    this.register.emit(
+      {username: this.username, password: this.password, avatar: this.avatar});
     return false;
+  }
+
+  onFileChange(event) {
+    this.avatar = event.target.files[0];
   }
 }

@@ -28,7 +28,7 @@ export class LoginFail implements Action {
 
 export class Register implements Action {
   readonly type = AuthActionTypes.Register;
-  constructor(public payload: { username: string, password: string}){}
+  constructor(public payload: { username: string, password: string, avatar: File}){}
 }
 
 export class RegisterSuccess implements Action {

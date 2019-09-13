@@ -18,10 +18,11 @@ export class UserService {
     return this.userRepository.findOne(id);
   }
   
-  create(username: string, password: string, role: string = 'user'): Promise<User>{
+  create(username: string, password: string, avatarUrlRelative: string, role: string = 'user'): Promise<User>{
     return this.userRepository.save({
       username: username,
       role: role,
+      avatarUrlRelative: avatarUrlRelative,
       credential: {
         password: password
       }

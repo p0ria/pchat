@@ -25,14 +25,15 @@ export class RoomComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params =>{
       let selectedRoomId = params['id'];
-      this.store.dispatch(new roomActions.SelectRoom(selectedRoomId));
-      this.store.dispatch(new roomActions.LoadRoomChats(selectedRoomId));
+      if(selectedRoomId){
+        this.store.dispatch(new roomActions.SelectRoom(selectedRoomId));
+        this.store.dispatch(new roomActions.LoadRoomChats(selectedRoomId));
+      }
     } );
 
     this.store.select(roomSelectors.getSelectedRoom).subscribe(
       room => {
         this.room = room;
-        this.messages = [];
       }
     );
 
@@ -71,7 +72,7 @@ export class RoomComponent implements OnInit {
     this.messages.push({
       text: text,
       date: date,
-      reply: user.id === this.user.id,
+      reply: user.id == this.user.id,
       user: {
         name: user.name,
         avatar: user.avatar

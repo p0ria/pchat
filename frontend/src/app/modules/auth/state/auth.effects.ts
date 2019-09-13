@@ -36,11 +36,11 @@ export class AuthEffects {
   register$: Observable<Action> = this.actions$.pipe(
     ofType(authActions.AuthActionTypes.Register),
     mergeMap((action: authActions.Register) =>
-      this.authService.register(action.payload.username, action.payload.password).pipe(
-        map((user: User) => new authActions.RegisterSuccess(user)),
-        catchError( err => of(new authActions.RegisterFail(err.message)))
-      )
-    )
+      this.authService.uploadAvatar(action.payload.avatar).pipe(
+        mergeMap((avatarUrlRelative: string) =>
+          this.authService.register(action.payload.username, action.payload.password, avatarUrlRelative)))),
+    map((user: User) => new authActions.RegisterSuccess(user)),
+    catchError( err => of(new authActions.RegisterFail(err.message)))
   );
 
   @Effect({dispatch: false})

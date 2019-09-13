@@ -12,7 +12,11 @@ export enum RoomActionTypes {
   LoadRoomChatsFail = '[Room] Load Room Chats Fail',
   AddRoomChat = '[Room] Add Room Chat',
   AddRoomChatSuccess = '[Room] Add Room Chat Success',
-  AddRoomChatFail = '[Room] Add Room Chat Fail'
+  AddRoomChatFail = '[Room] Add Room Chat Fail',
+  SubscribeToChatsSocket = '[Room] Subscribe To Chats Socket',
+  ChatReceivedSocket = '[Room] Chat Received Socket',
+  SendChatSocket = '[Room] Send Chat Socket'
+
 }
 
 export class LoadUserRooms implements Action {
@@ -64,6 +68,20 @@ export class AddRoomChatFail implements Action {
   constructor(public payload: string){}
 }
 
+export class SubscribeToChatsSocket implements Action {
+  readonly type = RoomActionTypes.SubscribeToChatsSocket;
+}
+
+export class ChatReceivedSocket implements Action {
+  readonly type = RoomActionTypes.ChatReceivedSocket;
+  constructor(public payload: RoomChat){}
+}
+
+export class SendChatSocket implements Action {
+  readonly type = RoomActionTypes.SendChatSocket;
+  constructor(public payload: RoomChat){}
+}
+
 export type RoomActions =
   LoadUserRooms |
   LoadUserRoomsSuccess |
@@ -74,4 +92,7 @@ export type RoomActions =
   LoadRoomChatsFail |
   AddRoomChat |
   AddRoomChatSuccess |
-  AddRoomChatFail;
+  AddRoomChatFail |
+  SubscribeToChatsSocket |
+  ChatReceivedSocket |
+  SendChatSocket;

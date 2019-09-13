@@ -8,6 +8,7 @@ import {EffectsModule} from "@ngrx/effects";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptor} from "./interceptors/token-interceptor";
 import {NgrxModule} from "./ngrx.module";
+import {SocketModule} from "./socket.module";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {NgrxModule} from "./ngrx.module";
     BrowserAnimationsModule,
     NgrxModule,
     EffectsModule.forRoot([]),
+    SocketModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }

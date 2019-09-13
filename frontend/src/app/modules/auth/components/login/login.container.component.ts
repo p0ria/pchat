@@ -30,7 +30,7 @@ export class LoginContainerComponent implements OnInit{
     this.store.dispatch(new authActions.Login(credential));
   }
 
-  register(credential: {username: string, password: string}){
+  register(credential: {username: string, password: string, avatar: File}){
     this.store.dispatch(new authActions.Register(credential));
   }
 }

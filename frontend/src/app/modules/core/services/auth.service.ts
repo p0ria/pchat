@@ -22,8 +22,19 @@ export class AuthService {
     );
   }
 
-  public register(username: string, password: string): Observable<User> {
-    let body = JSON.stringify({username: username, password: password});
+  public uploadAvatar(avatar: File): Observable<any>{
+    const formData = new FormData();
+    formData.append('avatar', avatar);
+    return this.http.post(
+      "http://localhost:3000/api/users/upload",
+      formData,
+      {responseType: "text"}
+    );
+  }
+
+  public register(username: string, password: string, avatarUrlRelative: string): Observable<User> {
+    let body = JSON.stringify(
+      {username: username, password: password, avatarUrlRelative: avatarUrlRelative});
     return this.http.post<User>(
       "http://localhost:3000/api/users",
       body,

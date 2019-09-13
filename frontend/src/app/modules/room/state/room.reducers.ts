@@ -39,6 +39,7 @@ export function reducer(state = initialState, action: RoomActions): RoomState {
     case RoomActionTypes.SelectRoom:
       return {
         ...state,
+        selectedRoomChats: [],
         selectedRoomId: action.payload
       };
 
@@ -68,6 +69,18 @@ export function reducer(state = initialState, action: RoomActions): RoomState {
         ...state,
         error: action.payload
       };
+
+    case RoomActionTypes.ChatReceivedSocket:
+      if(action.payload.room.id != state.selectedRoomId)
+        return {
+          ...state
+        };
+
+      else
+        return {
+          ...state,
+          selectedRoomChats: [...state.selectedRoomChats, action.payload]
+        };
 
     default:
       return state;
