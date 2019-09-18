@@ -1,11 +1,11 @@
 import {NgModule} from "@angular/core";
 import {
-  NbActionsModule, NbCardModule, NbChatModule, NbContextMenuModule,
+  NbActionsModule, NbButtonModule, NbCardModule, NbChatModule, NbContextMenuModule,
   NbIconModule,
   NbLayoutModule,
   NbMenuModule, NbSearchModule,
   NbSidebarModule,
-  NbThemeModule, NbUserModule
+  NbThemeModule, NbTooltipModule, NbUserModule
 } from "@nebular/theme";
 import {NbEvaIconsModule} from "@nebular/eva-icons";
 import {FlexLayoutModule} from "@angular/flex-layout";
@@ -25,7 +25,10 @@ const NB_MODULES = [
   NbSearchModule,
   NbContextMenuModule,
   NbCardModule,
-  NbChatModule
+  NbChatModule,
+  NbButtonModule,
+  NbTooltipModule,
+  NbActionsModule
 ];
 
 @NgModule({

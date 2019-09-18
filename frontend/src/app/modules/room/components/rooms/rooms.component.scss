@@ -1,8 +1,25 @@
-img {
-  width: 200px;
-  height: 200px;
+.rooms-page{
+  height: 100%;
+}
+
+.card-image{
+  width: 170px;
+  height: 150px;
+}
+
+.card-action{
+  padding-right: 10px !important;
+  padding-left: 10px !important;
 }
 
 a{
   text-decoration: none;
 }
+
+.rooms-actions{
+  nb-icon{
+    font-weight: bolder;
+    font-size: 25px;
+  }
+}
+

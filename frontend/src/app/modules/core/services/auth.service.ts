@@ -28,7 +28,7 @@ export class AuthService {
     return this.http.post(
       "http://localhost:3000/api/users/upload",
       formData,
-      {responseType: "text"}
+      {responseType: "text", headers: {"No-Auth": "True"}}
     );
   }
 
@@ -38,7 +38,7 @@ export class AuthService {
     return this.http.post<User>(
       "http://localhost:3000/api/users",
       body,
-      {headers: {"Content-Type": "application/json"}}
+      {headers: {"Content-Type": "application/json", "No-Auth": "True"}}
     );
   }
 }

@@ -27,6 +27,9 @@ export class LoginComponent{
 
   username: string;
   password: string;
+
+  usernameRegister: string;
+  passwordRegister: string;
   avatar: File;
   hide: boolean = true;
 
@@ -41,12 +44,21 @@ export class LoginComponent{
   }
 
   registerUser(){
+
     this.register.emit(
-      {username: this.username, password: this.password, avatar: this.avatar});
+      {username: this.usernameRegister, password: this.passwordRegister, avatar: this.avatar});
     return false;
   }
 
   onFileChange(event) {
     this.avatar = event.target.files[0];
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    if(event.key == "Enter"){
+      event.preventDefault();
+      this.loginUser();
+    }
+
   }
 }

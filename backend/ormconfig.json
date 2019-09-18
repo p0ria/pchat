@@ -1,9 +1,9 @@
 {
-  "type": "mssql",
+  "type": "mysql",
   "host": "localhost",
-  "port": 1433,
-  "username": "sa",
-  "password": "r@h3Madrese",
+  "port": 3306,
+  "username": "root",
+  "password": "root",
   "database": "pchat",
   "entities": ["src/**/*.entity{.ts,.js}"],
   "synchronize": true
