@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {
-  NbActionsModule, NbButtonModule, NbCardModule, NbChatModule, NbContextMenuModule,
-  NbIconModule,
+  NbActionsModule, NbButtonModule, NbCardModule, NbChatModule, NbContextMenuModule, NbDialogModule,
+  NbIconModule, NbInputModule,
   NbLayoutModule,
   NbMenuModule, NbSearchModule,
   NbSidebarModule,
@@ -28,10 +28,15 @@ const NB_MODULES = [
   NbChatModule,
   NbButtonModule,
   NbTooltipModule,
-  NbActionsModule
+  NbActionsModule,
+  NbDialogModule,
+  NbInputModule
 ];
 
 @NgModule({
+  imports: [
+    NbDialogModule.forChild({})
+  ],
   exports: [
     FlexLayoutModule,
     MaterialModule,

@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {RoomRoutingModule} from "./room-routing.module";
 import {SharedModule} from "../shared/shared.module";
 import {Store, StoreModule} from "@ngrx/store";
-import {COMPONENTS} from "./components";
+import {COMPONENTS, DYNAMICS} from "./components";
 import {reducer} from "./state/room.reducers";
 import {RoomEffects} from "./state/room.effects";
 import {EffectsModule} from "@ngrx/effects";
@@ -17,7 +17,10 @@ import * as fromRoom from "./state/room.reducers";
     EffectsModule.forFeature([RoomEffects])
   ],
   declarations: [
-    COMPONENTS
+    COMPONENTS,
+  ],
+  entryComponents: [
+    DYNAMICS
   ]
 })
 export class RoomModule{

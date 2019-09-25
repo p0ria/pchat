@@ -59,5 +59,7 @@ typings/
 *.iml
 
 #intelij
-
 .idea/
+
+#typeorm
+ormconfig.json

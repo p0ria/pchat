@@ -82,6 +82,19 @@ export function reducer(state = initialState, action: RoomActions): RoomState {
           selectedRoomChats: [...state.selectedRoomChats, action.payload]
         };
 
+    case RoomActionTypes.CreateRoomSuccess:
+      return {
+        ...state,
+        rooms: [...state.rooms, action.payload],
+        error: null
+      };
+
+    case RoomActionTypes.CreateRoomFail:
+      return {
+        ...state,
+        error: action.payload
+      };
+
     default:
       return state;
   }

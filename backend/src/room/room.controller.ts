@@ -4,6 +4,7 @@ import { CreateRoomDto } from '../models/dtos/create-room.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from './config';
 import { RoomDto } from '../models/dtos/room.dto';
+import {UrlConfig} from "../config";
 
 @Controller('api/rooms')
 export class RoomController {
@@ -22,8 +23,12 @@ export class RoomController {
   }
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file', multerOptions))
-  upload(@UploadedFile() file): string{
-    return process.env.ROOMS_UPLOAD_LOCATION + file.filename;
+  @UseInterceptors(FileInterceptor('avatar', multerOptions))
+  upload(@UploadedFile() file): {avatarUrlRelative: string, avatarUrl: string}{
+    let relativeUrl = process.env.ROOMS_UPLOAD_LOCATION + file.filename;
+    return {
+      avatarUrlRelative: relativeUrl,
+      avatarUrl: UrlConfig.BASE_ADDRESS + relativeUrl
+    };
   }
 }

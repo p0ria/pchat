@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {
   NbButtonModule,
-  NbCardModule, NbIconModule,
+  NbCardModule, NbDialogModule, NbIconModule,
   NbLayoutModule,
   NbMenuModule,
   NbSidebarModule,
@@ -14,6 +14,7 @@ import {NbEvaIconsModule} from "@nebular/eva-icons";
     NbThemeModule.forRoot({ name: 'default' }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
+    NbDialogModule.forRoot()
   ],
   exports: [
     NbThemeModule,
@@ -23,7 +24,8 @@ import {NbEvaIconsModule} from "@nebular/eva-icons";
     NbButtonModule,
     NbMenuModule,
     NbCardModule,
-    NbIconModule
+    NbIconModule,
+    NbDialogModule
   ]
 })
 export class NebularModule{

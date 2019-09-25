@@ -6,6 +6,10 @@ import * as roomSelectors from "../../state/room.selectors";
 import * as roomActions from "../../state/room.actions";
 import {Observable} from "rxjs";
 import {Room} from "../../../../models/room.model";
+import {NbDialogService} from "@nebular/theme";
+import {RoomDialogComponent} from "../room-dialog/room-dialog.component";
+import {CreateRoomDto} from "../../../../models/create-room.dto";
+
 
 @Component({
   selector: 'app-rooms',
@@ -15,9 +19,23 @@ import {Room} from "../../../../models/room.model";
 export class RoomsComponent implements OnInit {
   rooms$: Observable<Room[]>;
 
-  constructor(private store: Store<fromRoom.State>) {}
+  constructor(
+    private store: Store<fromRoom.State>,
+    private dialogService: NbDialogService) {}
 
   ngOnInit() {
     this.rooms$ = this.store.select(roomSelectors.getRooms);
+  }
+
+  createRoom() {
+    const dialogRef = this.dialogService.open<RoomDialogComponent>(RoomDialogComponent)
+      .onClose.subscribe((result: CreateRoomDto) =>{
+        if(result){
+          this.store.dispatch(new roomActions.CreateRoom({
+            name: result.name,
+            avatarUrlRelative: result.avatarUrlRelative
+          }));
+        }
+      });
   }
 }

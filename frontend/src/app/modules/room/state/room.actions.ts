@@ -1,6 +1,7 @@
 import {Action} from "@ngrx/store";
 import {Room} from "../../../models/room.model";
 import {RoomChat} from "../../../models/room-chat.model";
+import {CreateRoomDto} from "../../../models/create-room.dto";
 
 export enum RoomActionTypes {
   LoadUserRooms = '[Room] Load User Rooms',
@@ -15,8 +16,10 @@ export enum RoomActionTypes {
   AddRoomChatFail = '[Room] Add Room Chat Fail',
   SubscribeToChatsSocket = '[Room] Subscribe To Chats Socket',
   ChatReceivedSocket = '[Room] Chat Received Socket',
-  SendChatSocket = '[Room] Send Chat Socket'
-
+  SendChatSocket = '[Room] Send Chat Socket',
+  CreateRoom = '[Room] Create Room',
+  CreateRoomSuccess = '[Room] Create Room Success',
+  CreateRoomFail = '[Room] Create Room Fail'
 }
 
 export class LoadUserRooms implements Action {
@@ -82,6 +85,21 @@ export class SendChatSocket implements Action {
   constructor(public payload: RoomChat){}
 }
 
+export class CreateRoom implements Action {
+  readonly type = RoomActionTypes.CreateRoom;
+  constructor(public payload: CreateRoomDto){}
+}
+
+export class CreateRoomSuccess implements Action {
+  readonly type = RoomActionTypes.CreateRoomSuccess;
+  constructor(public payload: Room){}
+}
+
+export class CreateRoomFail implements Action {
+  readonly type = RoomActionTypes.CreateRoomFail;
+  constructor(public payload: string){}
+}
+
 export type RoomActions =
   LoadUserRooms |
   LoadUserRoomsSuccess |
@@ -95,4 +113,7 @@ export type RoomActions =
   AddRoomChatFail |
   SubscribeToChatsSocket |
   ChatReceivedSocket |
-  SendChatSocket;
+  SendChatSocket |
+  CreateRoom |
+  CreateRoomSuccess |
+  CreateRoomFail;
