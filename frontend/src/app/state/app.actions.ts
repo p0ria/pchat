@@ -1,5 +1,6 @@
 import {Action} from "@ngrx/store";
 import {User} from "../models/user.model";
+import {Room} from "../models/room.model";
 
 export enum AppActionTypes {
   LoadToken = '[App] Load Token',
@@ -10,6 +11,7 @@ export enum AppActionTypes {
   Logout = '[App] Logout',
   ClearLogin = '[App] Clear Login',
   Redirect = '[App] Redirect',
+  UpdateUserRooms = '[App] Update User Rooms'
 }
 
 export class LoadToken implements Action {
@@ -49,6 +51,11 @@ export class Redirect implements Action {
   constructor(public payload: string){}
 }
 
+export class UpdateUserRooms implements Action {
+  readonly type = AppActionTypes.UpdateUserRooms;
+  constructor(public payload: Room[]){}
+}
+
 export type AppActions =
   LoadToken |
   LoadTokenSuccess |
@@ -57,4 +64,5 @@ export type AppActions =
   GetProfileFail |
   Logout |
   ClearLogin |
-  Redirect;
+  Redirect |
+  UpdateUserRooms;

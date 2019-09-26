@@ -1,8 +1,8 @@
 import {NgModule} from "@angular/core";
 import {
-  NbActionsModule, NbButtonModule, NbCardModule, NbChatModule, NbContextMenuModule, NbDialogModule,
+  NbActionsModule, NbButtonModule, NbCardModule, NbChatModule, NbCheckboxModule, NbContextMenuModule, NbDialogModule,
   NbIconModule, NbInputModule,
-  NbLayoutModule,
+  NbLayoutModule, NbListModule,
   NbMenuModule, NbSearchModule,
   NbSidebarModule,
   NbThemeModule, NbTooltipModule, NbUserModule
@@ -30,7 +30,9 @@ const NB_MODULES = [
   NbTooltipModule,
   NbActionsModule,
   NbDialogModule,
-  NbInputModule
+  NbInputModule,
+  NbListModule,
+  NbCheckboxModule
 ];
 
 @NgModule({

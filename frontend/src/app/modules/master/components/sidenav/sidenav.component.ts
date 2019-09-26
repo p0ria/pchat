@@ -33,8 +33,9 @@ export class SidenavComponent implements OnInit {
       link: 'rooms'
     },
     {
-      title: 'Orders',
-      icon: 'plus-outline'
+      title: 'Join',
+      icon: 'plus-outline',
+      link: 'join'
     },
   ];
 

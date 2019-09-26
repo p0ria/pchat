@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Room} from "../../../models/room.model";
 import {RoomChat} from "../../../models/room-chat.model";
 import {CreateRoomDto} from "../../../models/create-room.dto";
+import {User} from "../../../models/user.model";
 
 @Injectable()
 export class RoomService {
@@ -38,8 +39,7 @@ export class RoomService {
     formData.append('avatar', avatar);
     return this.http.post<{avatarUrlRelative: string, avatarUrl: string}>(
       "http://localhost:3000/api/rooms/upload",
-      formData,
-      { headers: {"No-Auth": "True"}}
+      formData
     );
   }
 
@@ -49,6 +49,26 @@ export class RoomService {
       "http://localhost:3000/api/me/rooms",
       body,
       {headers: {"Content-Type": "application/json"}}
+    );
+  }
+
+  public getAllRooms(): Observable<Room[]>{
+    return this.http.get<Room[]>(
+      "http://localhost:3000/api/rooms"
+    );
+  }
+
+  public joinRoom(roomId: number): Observable<User> {
+    return this.http.put<User>(
+      `http://localhost:3000/api/me/rooms/${roomId}/join`,
+      null
+    );
+  }
+
+  public leaveRoom(roomId: number): Observable<User> {
+    return this.http.put<User>(
+      `http://localhost:3000/api/me/rooms/${roomId}/leave`,
+      null
     );
   }
 }

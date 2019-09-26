@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import * as fromRoot from "./state/app.reducers";
 import * as appActions from "./state/app.actions";
-import {NbIconLibraries} from "@nebular/theme";
 
 @Component({
   selector: 'app-root',

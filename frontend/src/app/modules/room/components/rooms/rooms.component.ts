@@ -21,7 +21,9 @@ export class RoomsComponent implements OnInit {
 
   constructor(
     private store: Store<fromRoom.State>,
-    private dialogService: NbDialogService) {}
+    private dialogService: NbDialogService) {
+    store.dispatch(new roomActions.LoadUserRooms());
+  }
 
   ngOnInit() {
     this.rooms$ = this.store.select(roomSelectors.getRooms);

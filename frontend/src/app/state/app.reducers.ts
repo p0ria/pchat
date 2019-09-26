@@ -1,5 +1,6 @@
 import {User} from "../models/user.model";
 import {AppActions, AppActionTypes} from "./app.actions";
+import {act} from "@ngrx/effects";
 
 export interface State {
   app: AppState;
@@ -46,6 +47,15 @@ export function reducer(state = initialState, action: AppActions): AppState {
         ...state,
         token: null,
         user: null
+      };
+
+    case AppActionTypes.UpdateUserRooms:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          rooms: action.payload
+        }
       };
 
     default:

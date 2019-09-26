@@ -29,7 +29,6 @@
     "@ngrx/store-devtools": "^8.2.0",
     "core-js": "^2.5.4",
     "eva-icons": "^1.1.1",
-    "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
     "ngx-socket-io": "^3.0.1",
     "rxjs": "~6.5.2",

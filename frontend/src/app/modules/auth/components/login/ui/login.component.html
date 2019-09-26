@@ -15,7 +15,7 @@
             <input matInput placeholder="Username" name="username" [(ngModel)]="username">
           </mat-form-field>
           <mat-form-field>
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" name="password" [(ngModel)]="password" (keydown)="onKeyDown($event)" >
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" name="password" [(ngModel)]="password" >
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -41,10 +41,10 @@
       <mat-card-content class="login-content" fxFlex="130px">
         <form fxLayout="column" fxLayoutAlign="center fill">
           <mat-form-field>
-            <input matInput placeholder="Username" name="username" [(ngModel)]="usernameRegister">
+            <input matInput placeholder="Username" name="username" [ngModel]="username">
           </mat-form-field>
           <mat-form-field>
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" name="password" [(ngModel)]="passwordRegister" >
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" name="password" [ngModel]="password" >
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>

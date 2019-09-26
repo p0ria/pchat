@@ -6,8 +6,14 @@ const routes: Routes = [
   { path: '', component: MasterComponent,
     children: [
       { path: '', redirectTo: 'rooms', pathMatch: 'full' },
-      { path: 'rooms',
-        loadChildren: () => import('../room/room.module').then(m => m.RoomModule)}
+      {
+        path: 'rooms',
+        loadChildren: () => import('../room/room.module').then(m => m.RoomModule)
+      },
+      {
+        path: 'join',
+        loadChildren: () => import('../join/join.module').then(m => m.JoinModule)
+      }
     ]},
 ];
 
