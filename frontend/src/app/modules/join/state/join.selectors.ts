@@ -7,3 +7,8 @@ export const getRooms = createSelector(
   getJoinFeatureState,
   state => state.rooms
 );
+
+export const getError = createSelector(
+  getJoinFeatureState,
+  state => state.error
+);

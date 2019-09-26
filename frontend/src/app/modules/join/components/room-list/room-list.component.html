@@ -1,5 +1,5 @@
 <div class="join-page" fxLayout="column">
-  <nb-card>
+  <nb-card fxFlex="1 0 auto">
     <nb-list>
       <nb-list-item *ngFor="let room of (rooms$ | async)">
         <app-room-list-item

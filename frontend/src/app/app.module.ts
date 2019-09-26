@@ -9,6 +9,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptor} from "./interceptors/token-interceptor";
 import {NgrxModule} from "./ngrx.module";
 import {SocketModule} from "./socket.module";
+import {NbToastrModule} from "@nebular/theme";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {SocketModule} from "./socket.module";
     BrowserAnimationsModule,
     NgrxModule,
     EffectsModule.forRoot([]),
-    SocketModule
+    SocketModule,
+    NbToastrModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
